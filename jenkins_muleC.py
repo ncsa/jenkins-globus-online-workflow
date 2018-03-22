@@ -279,7 +279,7 @@ def main():
         print("WORKFLOW: ", mylabel)
         my_transfer(tclient, EP_BW, EP_OFFICEMAC, mylabel,
                     "/~/jenkins-mule/jenkins_test_request",
-                    "/~/globus-cli/globus_task_list_refresh/jenkins_test_request",
+                    "/~/globus-cli/jenkins-globus-online-workflow/jenkins_test_request",
                     False)
         test_requested = os.path.exists('./jenkins_test_request')
         if test_requested:
