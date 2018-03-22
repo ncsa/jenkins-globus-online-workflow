@@ -231,10 +231,10 @@ def my_task_list(tclient):
     mylabel = "jenkins_status2bw"
     print("WORKFLOW: ", mylabel)
     my_transfer(tclient, EP_OFFICEMAC, EP_BW, mylabel,
-                "/~/globus-cli/globus_task_list_refresh/status_file",
+                "/~/globus-cli/jenkins-globus-online-workflow/status_file",
                 "/~/jenkins-mule/status_file", False)
     my_transfer(tclient, EP_OFFICEMAC, EP_BW, mylabel,
-                "/~/globus-cli/globus_task_list_refresh/error_file",
+                "/~/globus-cli/jenkins-globus-online-workflow/error_file",
                 "/~/jenkins-mule/error_file", False)
     os.system("cat /dev/null > error_file")
 # end def my_task_list
