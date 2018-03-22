@@ -146,6 +146,18 @@ def my_transfer(tclient, srcpoint, destpoint, mylabel, srcpath,
     if DEBUG == 1:
         print(tdata)
     my_task_wait(tclient, transfer_result)
+    for event in tclient.task_event_list(transfer_result["task_id"]):
+         print("Event on Task({}) at {}:\n{}".format(
+            transfer_result["task_id"], event["time"], event["description"])
+         )
+# may want to log these also to a file
+         error_file = open('error_file', 'a')
+         if (event["is_error"]):
+             print(" is_error:{}".format(
+                 event["details"])
+             )
+             error_file.write("%s: %s\n" % (event["time"],event["details"]))
+             error_file.close()
 # end def my_transfer()
 
 
@@ -184,7 +196,7 @@ def my_task_list(tclient):
     my_delete(tclient, EP_NEARLINE, mylabel, MYSCRATCH, True)
 
     # show some info about the transfers
-    for transfer in tclient.task_list(num_results=6):
+    for transfer in tclient.task_list(num_results=7):
         if DEBUG == 1:
             print(transfer)
         print("task_id= ( %s ) %s -> %s"
@@ -198,7 +210,6 @@ def my_task_list(tclient):
                  transfer['bytes_transferred']/MB,
                  transfer['effective_bytes_per_second']/MB,
                  transfer['files_transferred']))
-
     # write the info out to status_file
     status_file = open('status_file', 'a')
     for transfer in tclient.task_list(num_results=6):
@@ -216,12 +227,16 @@ def my_task_list(tclient):
     status_file.close()
     os.system("date >> status_file")
 
-    # send the status_file up to bw, for jenkins to monitor
+    # send the status_file and error_file up to bw, for jenkins to monitor
     mylabel = "jenkins_status2bw"
     print("WORKFLOW: ", mylabel)
     my_transfer(tclient, EP_OFFICEMAC, EP_BW, mylabel,
                 "/~/globus-cli/globus_task_list_refresh/status_file",
                 "/~/jenkins-mule/status_file", False)
+    my_transfer(tclient, EP_OFFICEMAC, EP_BW, mylabel,
+                "/~/globus-cli/globus_task_list_refresh/error_file",
+                "/~/jenkins-mule/error_file", False)
+    os.system("cat /dev/null > error_file")
 # end def my_task_list
 
 
