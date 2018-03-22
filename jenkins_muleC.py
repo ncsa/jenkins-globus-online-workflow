@@ -152,7 +152,7 @@ def my_transfer(tclient, srcpoint, destpoint, mylabel, srcpath,
          )
 # may want to log these also to a file
          error_file = open('error_file', 'a')
-         if (event["is_error"]):
+         if (event["is_error"]) and (event["description"] != "file not found"):
              print(" is_error:{}".format(
                  event["details"])
              )
