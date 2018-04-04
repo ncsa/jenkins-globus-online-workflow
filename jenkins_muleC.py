@@ -147,17 +147,15 @@ def my_transfer(tclient, srcpoint, destpoint, mylabel, srcpath,
         print(tdata)
     my_task_wait(tclient, transfer_result)
     for event in tclient.task_event_list(transfer_result["task_id"]):
-         print("Event on Task({}) at {}:\n{}".format(
-            transfer_result["task_id"], event["time"], event["description"])
-         )
+        print("Event on Task({}) at {}:\n{}".format(
+            transfer_result["task_id"], event["time"], event["description"]))
 # may want to log these also to a file
-         error_file = open('error_file', 'a')
-         if (event["is_error"]) and (event["description"] != "file not found"):
-             print(" is_error:{}".format(
-                 event["details"])
-             )
-             error_file.write("%s: %s\n" % (event["time"],event["details"]))
-             error_file.close()
+        error_file = open('error_file', 'a')
+        if (event["is_error"]) and (event["description"] != "file not found"):
+            print(" is_error:{}".format(
+                event["details"]))
+            error_file.write("%s: %s\n" % (event["time"], event["details"]))
+            error_file.close()
 # end def my_transfer()
 
 
