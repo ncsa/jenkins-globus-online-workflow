@@ -246,7 +246,7 @@ def main():
     try:
         # if we already have tokens, load and use them
         tokens = load_tokens_from_file(TOKEN_FILE)
-    except:
+    except IOError:
         pass
 
     if not tokens:
@@ -255,7 +255,7 @@ def main():
 
         try:
             save_tokens_to_file(TOKEN_FILE, tokens)
-        except:
+        except IOError:
             pass
 
     transfer_tokens = tokens['transfer.api.globus.org']
