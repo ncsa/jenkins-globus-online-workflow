@@ -2,3 +2,4 @@ error_file
 status_file
 refresh-tokens.json
 jenkins_test_request
+uuid.txt

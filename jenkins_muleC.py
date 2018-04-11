@@ -44,6 +44,9 @@ EP_BW = "d59900ef-6d04-11e5-ba46-22000b92c6ec"
 EP_JYC = "d0ccdc02-6d04-11e5-ba46-22000b92c6ec"
 EP_NEARLINE = "d599008e-6d04-11e5-ba46-22000b92c6ec"
 EP_OFFICEMAC = "ce71c6f2-6d04-11e5-ba46-22000b92c6ec"
+EP_H2OLOGIN1 = "7169968a-3288-11e8-b90d-0ac6873fc732"
+UUID_FILE = open("uuid.txt", "r")
+EP_OFFICEMAC = UUID_FILE.read()
 
 GET_INPUT = getattr(__builtins__, 'raw_input', input)
 
