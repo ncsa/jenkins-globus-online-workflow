@@ -13,9 +13,10 @@ Based on tutorial and documentation at:
 import time
 import datetime
 import os
-import globus_sdk
 import json
 import webbrowser
+import globus_sdk
+
 
 # some globals
 CLIENT_ID = '231634e4-37cc-4a06-96ce-12a262a62da7'
